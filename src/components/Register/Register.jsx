@@ -26,7 +26,7 @@ function Register() {
             if (data.message === 'success') {
                 localStorage.setItem('UserToken', data.token)
                 setuserToken(data.token)
-                navigate('/')
+                navigate('/e-commerce')
                 // console.log(data);
             }
         } catch (error) {

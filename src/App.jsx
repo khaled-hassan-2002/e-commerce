@@ -19,7 +19,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 let query = new QueryClient()
 let routes = createBrowserRouter([
   {
-    path: '', element: <Layout />, children: [
+    path: 'e-commerce', element: <Layout />, children: [
       { index: true, element: <ProtectedRoute> <Home /></ProtectedRoute> },
       { path: 'products', element: <ProtectedRoute> <Products /></ProtectedRoute> },
       { path: 'cart', element: <ProtectedRoute> <Cart /></ProtectedRoute> },

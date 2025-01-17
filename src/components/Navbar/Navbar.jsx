@@ -12,7 +12,7 @@ function Navbar() {
     function signout() {
         localStorage.removeItem('UserToken')
         setuserToken(null)
-        navigate('/login')
+        navigate('login')
     }
     return <>
 
