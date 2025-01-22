@@ -1,22 +1,35 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import style from './RecentProducts.module.css';
 import axios from 'axios';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
+import useProducts from './../../Hooka/useProducts';
+import { CartContext } from '../../context/CartContext';
+import toast from './../../../node_modules/react-hot-toast/src/index';
+
+
 
 function RecentProducts() {
 
 
-    function getProducts() {
-        return axios.get(`https://ecommerce.routemisr.com/api/v1/products`)
-    }
 
-    let { data, isError, error, isLoading, isFetching } = useQuery({
-        queryKey: ['recentProducts'],
-        queryFn: getProducts
-    })
-    console.log(data);
+    let { addToCart } = useContext(CartContext)
+    async function addProduct(id) {
+        let res = await addToCart(id)
+        if (res.data.status === 'success') {
+            toast.success('Product added successfully to your cart', {
+                duration: 3000,
+                position: 'top-center'
+            })
+        } else {
+            toast.error('error', {
+                duration: 3000,
+                position: 'top-center'
+            })
+        }
+    }
+    let { data, isError, error, isLoading, isFetching } = useProducts()
 
 
     if (isLoading) {
@@ -41,7 +54,7 @@ function RecentProducts() {
                                 <i className='fas fa-star text-yellow-500'><span className='text-sm ms-1 text-black'>{product.ratingsAverage}</span></i>
                             </div>
                         </Link>
-                        <button className='btn'>Add To Cart</button>
+                        <button onClick={() => addProduct(product.id)} className='btn'>Add To Cart</button>
                     </div>
                 </div>
             ))

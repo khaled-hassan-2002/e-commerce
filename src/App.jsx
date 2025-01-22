@@ -13,6 +13,10 @@ import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import ProductDetails from './components/ProductDetails/ProductDetails';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import CartContextProvider from "./context/CartContext";
+import { Toaster } from './../node_modules/react-hot-toast/src/components/toaster';
+
+
 
 
 
@@ -36,14 +40,28 @@ function App() {
 
 
   return <>
-
-    <QueryClientProvider client={query}>
-      <UserContextProvider>
-        <ReactQueryDevtools />
-        <RouterProvider router={routes}></RouterProvider>
-      </UserContextProvider>
-    </QueryClientProvider>
-
+    <CartContextProvider>
+      <QueryClientProvider client={query}>
+        <UserContextProvider>
+          <ReactQueryDevtools />
+          <RouterProvider router={routes}></RouterProvider>
+          <Toaster toastOptions={{
+            success: {
+              style: {
+                background: 'green',
+                color: 'white'
+              },
+            },
+            error: {
+              style: {
+                background: 'red',
+                color: 'white'
+              }
+            }
+          }} />
+        </UserContextProvider>
+      </QueryClientProvider>
+    </CartContextProvider>
   </>
 
 }
