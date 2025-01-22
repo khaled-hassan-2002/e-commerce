@@ -27,7 +27,7 @@ function Login() {
             if (data.message === 'success') {
                 localStorage.setItem('UserToken', data.token)
                 setuserToken(data.token)
-                navigate('/e-commerce')
+                navigate('/')
             }
         } catch (error) {
             setisloaing(false)
